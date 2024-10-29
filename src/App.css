@@ -1,38 +1,680 @@
+body, html {
+  font-family: Arial, sans-serif;
+  background-color: #F5F5F5;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 .App {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: calc(100% - 22px);
+  padding: 15px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+} */
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.menu-bar {
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid #ddd;
+}
+
+/* 기본 메뉴 스타일 */
+.menu-bar a {
+  color: #333;
+  transition: color 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+
+/* 활성화된 메뉴 스타일 */
+.menu-bar a.active {
+  color: #007bff; 
+  transform: scale(1.2);
+}
+
+/* 호버 시 스타일 */
+.menu-bar a:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}
+
+
+#map {
+  width: 100vw;
+  height: calc(100vh - 170px);
+  margin: 0;
+  padding-top: 50px;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 40px);
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.search-bar input[type="text"] {
+  flex-grow: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+.search-bar button:hover {
+  background-color: #007bff;
+}
+
+.toast {
+  position: fixed;
+  bottom: 80px;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: #333;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  visibility: visible;
+  z-index: 1000;
+  width: calc(100% - 40px);
+  max-width: 400px;
+  text-align: left;
+}
+
+.toast h2 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.toast p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.toast button {
+  padding: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.toast button:hover {
+  background-color: #d0e8ff;
+}
+
+/* 반응형 웹 설정 */
+@media (max-width: 768px) {
+  .menu-bar {
+    height: 100px;
+    
+  }
+
+  #map {
+    height: calc(100vh - 110px);
+  }
+
+  button, input[type="text"] {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .search-bar {
+    width: 60%;
+  }
+
+  button, input[type="text"] {
+    font-size: 1.1rem;
+  }
+}
+
+/* 로그인 */
+.login-container {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 100px 1px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-logo {
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-logo img {
+  width: 160px; /* 로고 크기 조정 */
+  height: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-input {
+  width: calc(100% - 20px);
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  width: 94%;
+  padding: 12px;
+  background-color: #48A0FF;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #48A0FF;
+}
+
+.login-footer {
+  margin-top: 0px;
+  color: #666;
+  font-size: 14px;
+}
+
+.register-link {
+  color: #373737;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 100px;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+/**/
+.register-container {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px 1px;
+  text-align: center;
+}
+
+.register-logo {
+  margin-bottom: 20px;
+}
+
+.register-logo img {
+  width: 160px;
+  height: auto;
+}
+
+.email-input-group {
+  width: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  margin-left: 10px;
+}
+
+.email-input-group input[type="text"],
+.email-input-group select {
+  width: calc(50% - 50px);
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.email-check-button {
+  width: 10%;
+  padding: 0px;
+  margin: 10px 0;
+  background-color: #48a0ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 1px;
+}
+
+.register-input {
+  width: 87%;
+  padding: 13px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.register-checkbox-group {
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: -10px;
+}
+
+.register-checkbox-group label {
+  display: block;
+  font-size: 14px;
+  margin: 1px 0;
+}
+
+.register-button {
+  width: 94%;
+  padding: 12px;
+  background-color: #48a0ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: #48A0FF;
+}
+
+.register-footer {
+  margin-top: 0px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link {
+  color: #373737;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 170px;
+}
+
+/* mypage */
+.mypage-container {
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.mypage-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-info-card {
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.user-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.edit-toggle {
+  color: #48A0FF;
+  cursor: pointer;
+}
+
+.user-info-display p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info-edit .edit-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.label {
+  flex: 0 0 80px;
+}
+
+.value {
+  flex: 1;
+  text-align: right;
+}
+
+.edit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+
+.mypage-input-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.email-part {
+  flex: 1; 
+  width: 30%;
+  max-width: 90px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.at-symbol {
+  margin: 0 5px; 
+  color: #888; 
+}
+
+
+.gender-option {
+  align-items: center;
+  margin-right: 120px;
+}
+
+.action-button {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px); 
+  max-width: 400px;
+  padding: 15px;
+  background-color: #48A0FF;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+/* 즐겨찾기 */
+.favorite-list-container {
+  width: 75%;
+  max-width: 400px;
+  margin: 110px auto 20px; 
+  padding: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.favorite-list-container h2 {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #373737;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+.favorite-list-container p {
+  text-align: center;
+  color: #555;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid #d1e3f8;
+  border-radius: 12px;
+  background: #f1f8ff;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.favorite-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.favorite-item span {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.remove-button {
+  background: linear-gradient(135deg, #ff7b7b, #ff4d4d);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.remove-button:hover {
+  background: linear-gradient(135deg, #e60000, #cc0000);
+  transform: scale(1.05);
+}
+
+/* AdminPage.css */
+.admin-container {
+  padding: 30px;
+  width: 100%;
+}
+
+.mypage {
+  width: 90%;
+  max-width: 400px;
+  padding: 0px;
+  margin: 0 auto;
+}
+
+.user-info-card {
+  width: 83%;
+  margin: 30px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.mypage-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-toggle {
+  color: #48A0FF;
+  cursor: pointer;
+}
+
+.admin-info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-info-item {
+  justify-content: space-between;
+  padding: 15px;
+  margin-bottom: 8px;
+}
+
+.admin-edit-section {
+  width: 80%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-form {
   display: flex;
   flex-direction: column;
+}
+
+.admin-form label {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 16px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.admin-form input {
+  width: 220px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-left: auto;
+  box-sizing: border-box; 
+}
+
+.admin-action-button {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px); 
+  max-width: 400px;
+  padding: 15px;
+  background-color: #48A0FF;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.admin-action-button:hover {
+  background-color: #0056b3;
+}
+
+/*  */
+.custom-alert {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
+  padding: 20px 5px;
+  width: 80%;
+  border-radius: 8px;
+  z-index: 1000;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeInOut 3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
